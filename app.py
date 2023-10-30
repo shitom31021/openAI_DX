@@ -30,17 +30,15 @@ system_prompt = """
 　　・会社全体がアナログ的な文化・価値観が定義している
 　　・明確な目的・目標が定まっていない
 　　・組織のITリテラシーが不足している
-　　・長年の取引慣行に妨げられている
 　　・資金不足
-　　・活用したいITツールがない
 　　・部門間の対立がある
 　・評価者は「失敗する要因」項目をもとに質問を行う
-　・評価者の質問回数は11回
+　・評価者の質問回数は最大8回
 　・「質問」は簡潔に行う
 　・「回答後」を次の質問を表示。
 　・「質問」の後に、その回答に評価はぜず、次の質問を行う
 　・すべての「質問」が終わったあとに「評価」を表示する。
-　・すべての「質問」が終わった後に「アドバイス」を300文字前後で表示する
+　・すべての「質問」が終わった後に「アドバイス」を300文字程度で表示する
 ・「回答者の行動」について
 　・評価者の「質問」に、「回答者」が回答出来る
 　・「回答者」が回答するたびに、「残り行動回数」が1回減る。
@@ -49,9 +47,9 @@ system_prompt = """
 　・評価点数表示後
 　　・ありがとうございました。を表示しする
 　　・その後は、どのような回答も受け付けない
-・評価者の評価完了後は、リセットし始めからスタートする
-・このコメント後にChatGPTが「質問」を開始する
+・評価者の最終コメント後にリセットし、また新たにChatGPTが「質問」を開始する
 """
+
 
 # st.session_stateを使いメッセージのやりとりを保存
 if "messages" not in st.session_state:
@@ -67,7 +65,7 @@ def communicate():
     messages.append(user_message)
 
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages=messages
     )  
 
@@ -82,7 +80,7 @@ st.title(" DX度診断")
 st.image("05_rpg.png")
 st.write("DXの評価です")
 
-user_input = st.text_input("ニックネームを入力してください。回答に時間がかかる場合があります。", key="user_input", on_change=communicate)
+user_input = st.text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
