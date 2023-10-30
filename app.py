@@ -80,7 +80,7 @@ st.title(" DX度診断")
 st.image("05_rpg.png")
 st.write("DXの評価です")
 
-user_input = st.text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
+user_input = st.text_input("ニックネームを入力してください。回答には時間がかかる場合があります", key="user_input", on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
