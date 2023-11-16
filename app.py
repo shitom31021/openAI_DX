@@ -62,9 +62,9 @@ def communicate():
     messages.append(user_message)
 
     response = openai.ChatCompletion.create(
-        model="GPT-4 Turbo",
+        model="gpt-3.5-turbo",
         messages=messages
-    )  
+    )
 
     bot_message = response["choices"][0]["message"]
     messages.append(bot_message)
