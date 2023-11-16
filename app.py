@@ -62,7 +62,7 @@ def communicate():
     messages.append(user_message)
 
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4-1106-vision-preview",
         messages=messages
     )
 
