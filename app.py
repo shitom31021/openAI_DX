@@ -61,10 +61,10 @@ def communicate():
     user_message = {"role": "user", "content": st.session_state["user_input"]}
     messages.append(user_message)
 
-    response = openai.ChatCompletion.create(
-        model="GPT-4o",
-        messages=messages
-    )
+  response = openai.ChatCompletion.create(
+    model="GPT-4.0",
+    messages=messages
+)
 
     bot_message = response["choices"][0]["message"]
     messages.append(bot_message)
