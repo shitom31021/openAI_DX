@@ -63,15 +63,13 @@ def communicate():
     user_message = {"role": "user", "content": st.session_state["user_input"]}
     messages.append(user_message)
 
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=messages
-        )
-        bot_message = response["choices"][0]["message"]
-        messages.append(bot_message)
-    except openai.error.OpenAIError as e:
-        st.error(f"エラーが発生しました: {e}")
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages
+    )
+
+    bot_message = response["choices"][0]["message"]
+    messages.append(bot_message)
 
     st.session_state["user_input"] = ""  # 入力欄を消去
 
@@ -91,3 +89,4 @@ if st.session_state["messages"]:
             speaker = "🤖"
 
         st.write(f"{speaker}: {message['content']}")
+
